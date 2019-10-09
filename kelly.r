@@ -68,21 +68,18 @@ knapsack_dynamic(x = knapsack_objects[1:12,], W = 2000)
 greedy_knapsack <- function(x, W){
   x["r"] <- x$v / x$w
   total_value <- 0
-  total_weight<- 0
   elements <- vector()
   flag <- TRUE
-  while(W > 0 && nrow(x) != 0){
+  while(nrow(x) != 0){
     n <- which.max(x$r)
-    # cat("n: ", n, "lenght: ", nrow(x), "\n")
     if(W >= x$w[n]){
       elements <- c(elements, as.numeric(row.names(x[n,])))
       total_value <- total_value + x$v[n]
-      total_weight <- total_weight + x$w[n]
       W <- W - x$w[n]
     }
     x <- x[-n, ]
   }
-  result <- list(value = total_value, weight = total_weight, elements = elements)
+  result <- list(value = total_value, elements = elements)
   return(result)
 }
 
