@@ -1,4 +1,4 @@
-RNGkind(sample.kind = "Rejection")
+RNGkind(sample.kind = "Rounding")
 set.seed(42)
 n <- 2000
 knapsack_objects <- data.frame(
