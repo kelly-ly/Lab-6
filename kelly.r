@@ -47,14 +47,10 @@ knapsack_dynamic <- function(x, W){
         dynamic_matrix[i, j] = dynamic_matrix[i-1, j]
       }else{
         dynamic_matrix[i, j] = max(dynamic_matrix[i-1, j],dynamic_matrix[i-1, j - w[i-1]] + v[i-1])
-        if(dynamic_matrix[i, j] > total_value){
-          total_value <- dynamic_matrix[i, j]
-          max_pos<-c(i,j)
-        }
       }
     }
   }
-  temp_value <- total_value
+  temp_value <- max(dynamic_matrix)
   while(temp_value > 0){
     n <- which(dynamic_matrix == temp_value, arr.ind = TRUE)[1,1]
     elements <- c(as.numeric(n-1), elements)
