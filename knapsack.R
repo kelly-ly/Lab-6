@@ -40,7 +40,7 @@ brute_force_knapsack<-function(x,W){
 # brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500)
 # brute_force_knapsack(x = knapsack_objects[1:8,], W = 2000)
 # brute_force_knapsack(x = knapsack_objects[1:12,], W = 2000)
-#   
+
 
 knapsack_dynamic<-function(x,W){
   v<-x$v
@@ -74,14 +74,52 @@ knapsack_dynamic<-function(x,W){
   
   return(list(value=max,elements=max_element))
 }
-knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500)
-knapsack_dynamic(x = knapsack_objects[1:12,], W = 3500)
-knapsack_dynamic(x = knapsack_objects[1:8,], W = 2000)
-knapsack_dynamic(x = knapsack_objects[1:12,], W = 2000)
+# knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500)
+# knapsack_dynamic(x = knapsack_objects[1:12,], W = 3500)
+# knapsack_dynamic(x = knapsack_objects[1:8,], W = 2000)
+# knapsack_dynamic(x = knapsack_objects[1:12,], W = 2000)
 
 
+greedy_knapsack<-function(x,W){
+  new_x<-x[order(x$v,decreasing = TRUE),]
+  v<-new_x$v
 
+  w<-new_x$w
 
+  n<-nrow(new_x)
+  
+  greedy_w<-W
+  max_value<-0
+  max_pos<-c()
+  for(i in 1:n){
+    if(w[i]>W){
+      next
+    }
+    else{
+      greedy_w<-w[i]
+      temp_value<-v[i]
+      temp_pos<-c(i)
+    }
+    for(j in (i+1):n){
+      if(j==n+1) break
+      if(greedy_w+w[j]<W){
+        greedy_w<-greedy_w+w[j]
+        temp_pos<-c(temp_pos,j)
+        temp_value<-temp_value+v[j]
+      }
+    }
+
+    if(temp_value>max_value){
+      max_value<-temp_value
+      max_pos<-temp_pos
+    }
+  }
+  
+  return(list(new_x,max_value,max_pos))
+  
+}
+greedy_knapsack(x = knapsack_objects[1:800,], W = 3500)
+knapsack_objects[1:8,]
 # 
 # knapsack_objects[1:8,]
 # 
