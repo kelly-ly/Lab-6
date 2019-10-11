@@ -66,8 +66,10 @@ knapsack_dynamic(x = knapsack_objects[1:12,], W = 2000)
 
 # 1.1.4 Greedy heuristic
 greedy_knapsack <- function(x, W){
+  stopifnot(all(x > 0) && W > 0)
   x["r"] <- x$v / x$w
   total_value <- 0
+  # total_weight <- 0
   elements <- vector()
   flag <- TRUE
   while(nrow(x) != 0){
@@ -88,8 +90,8 @@ greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)
 
 # list <- greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)$elements
 # a <- knapsack_objects[1:1200,][list,]
-# print(nrow(a))
-# print(a)
+# # print(nrow(a))
+# # print(a)
 # print(sum(a$w))
 # print(sum(a$v))
 

@@ -83,9 +83,9 @@ knapsack_dynamic<-function(x,W){
 greedy_knapsack<-function(x,W){
   new_x<-x[order(x$v,decreasing = TRUE),]
   v<-new_x$v
-
+  
   w<-new_x$w
-
+  
   n<-nrow(new_x)
   
   greedy_w<-W
@@ -108,7 +108,7 @@ greedy_knapsack<-function(x,W){
         temp_value<-temp_value+v[j]
       }
     }
-
+    
     if(temp_value>max_value){
       max_value<-temp_value
       max_pos<-temp_pos

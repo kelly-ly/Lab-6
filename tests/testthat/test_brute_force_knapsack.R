@@ -1,3 +1,4 @@
+
 context("brute_force_knapsack")
 
 set.seed(42)
