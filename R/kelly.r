@@ -90,8 +90,6 @@ greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)
 
 # list <- greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)$elements
 # a <- knapsack_objects[1:1200,][list,]
-# # print(nrow(a))
-# # print(a)
 # print(sum(a$w))
 # print(sum(a$v))
 
