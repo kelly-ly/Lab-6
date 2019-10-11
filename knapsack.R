@@ -7,11 +7,16 @@ knapsack_objects <-
   )
 knapsack_objects
 
-brute_force_knapsack<-function(x,W){
+source("brute_force_cpp.cpp")
+x = knapsack_objects[1:8,]
+brute_force(x$w,x$v,3500)
+
+brute_force_knapsack<-function(x,W,fast=FALSE){
   if(ncol(x)!=2)stop("exceed two variable")
   if(W<=0)stop("not postive value")
   max_value=0
   max_items<-c()
+  if(fast==FALSE){
   for(i in 1:2^nrow(x)-1){
     a<-intToBits(i)
     number_of_items<-c()
@@ -21,7 +26,6 @@ brute_force_knapsack<-function(x,W){
       if(a[j]==1)
       {
         number_of_items<-c(number_of_items,j)
-        print(number_of_items)
         weight_of_items<-weight_of_items+x$w[j]
         value_of_items<-value_of_items+x$v[j]
       }
@@ -33,10 +37,15 @@ brute_force_knapsack<-function(x,W){
       }
     }
   }
-  return(list(value=max_value,element=max_items))
+    return(list(value=max_value,element=max_items))
+  }
+  else{
+    return(brute_force(x$w,x$v,W))
+  }
+
 }
 
-# brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
+brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500,fast = TRUE)
 # brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500)
 # brute_force_knapsack(x = knapsack_objects[1:8,], W = 2000)
 # brute_force_knapsack(x = knapsack_objects[1:12,], W = 2000)
