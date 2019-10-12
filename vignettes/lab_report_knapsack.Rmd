@@ -1,0 +1,58 @@
+---
+title: "lab_report_knapsack"
+author: "Zuxiang Li, Ying Luo"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{lab_report_knapsack}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup}
+library(assignment6Package)
+```
+
+```{r}
+suppressWarnings(RNGversion("3.5.9"))
+set.seed(42)
+n <- 2000
+knapsack_objects <- data.frame(
+  w=sample(1:4000, size = n, replace = TRUE),
+  v=runif(n = n, 0, 10000)
+  )
+```
+
+# The knapsack package
+The package will contain three diﬀerent functions for solving what is called the knapsack problem. The knapsack problem is a discrete optimization problem where we have a knapsack that can take a limited weight W and we want to ﬁll this knapsack with a number of items i = 1,...,n, each with a weight wi and a value vi. The goal is to ﬁnd the knapsack with the largest value of the elements added to the knapsack.
+
+## Brute force search
+Brute-force search giveS a correct answer in all situations for the knapsack problem.
+
+Function knapsack_brute_force(x, W) that takes a data.frame cx with two variables v and w and returns the maximum knapsack value and which elements (rows in the data.frame). The variable W is the knapsack size.
+
+If the parameter parallel is TRUE, the function would parallelize over the detected cores.
+
+```{r}
+brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
+brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500)
+brute_force_knapsack(x = knapsack_objects[1:8,], W = 2000)
+brute_force_knapsack(x = knapsack_objects[1:12,], W = 2000)
+```
+
+## Dynamic programming
+Implement Dynamic programming as knapsack_dynamic(x, W). This function would return the same results as the brute force algorithm, but much better since the algorithm will run in O(Wn).
+
+```{r}
+knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500)
+knapsack_dynamic(x = knapsack_objects[1:12,], W = 3500)
+knapsack_dynamic(x = knapsack_objects[1:8,], W = 2000)
+knapsack_dynamic(x = knapsack_objects[1:12,], W = 2000)
+```
+
+## Greedy heuristic
+Using the a heuristic or approximation for the problem which will not give an exact result (but it can be shown that it will return at least 50% of the true maximum value), but it will reduce the computational complexity considerably (actually to O(nlogn) due to the sorting part of the algorithm).
+
+```{r}
+greedy_knapsack(x = knapsack_objects[1:800,], W = 3500)
+greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)
+```

@@ -16,9 +16,8 @@
 #' brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500)
 #' brute_force_knapsack(x = knapsack_objects[1:8,], W = 2000)
 #' brute_force_knapsack(x = knapsack_objects[1:12,], W = 2000)
-#' 
+#' @export
 #' @import foreach doParallel parallel
-NULL
 
 brute_force_knapsack <- function(x, W, parallel = FALSE){
   stopifnot(is.data.frame(x) && all(x > 0) && W > 0)
@@ -35,7 +34,7 @@ brute_force_knapsack <- function(x, W, parallel = FALSE){
   }else{
     cl <- makeCluster(4)
     registerDoParallel(cl)
-    foreach(i = 1:(2^nrow(x)-1)) %dopar% {
+    foreach(i = 1:(2^nrow(x)-1)) %do% {
       ids <- which(intToBits(i) == 01)
       if(sum(x$w[ids]) <= W && sum(x$v[ids]) > total_value){
         total_value <- sum(x$v[ids])
@@ -66,6 +65,7 @@ brute_force_knapsack <- function(x, W, parallel = FALSE){
 #' knapsack_dynamic(x = knapsack_objects[1:12,], W = 3500)
 #' knapsack_dynamic(x = knapsack_objects[1:8,], W = 2000)
 #' knapsack_dynamic(x = knapsack_objects[1:12,], W = 2000)
+#' @export
 
 knapsack_dynamic <- function(x, W){
   stopifnot(is.data.frame(x) && all(x > 0) && W > 0)
@@ -81,7 +81,7 @@ knapsack_dynamic <- function(x, W){
         dynamic_matrix[i, j] <- dynamic_matrix[i-1, j]
       }else{
         pri_value <- 
-        dynamic_matrix[i, j] <- max(dynamic_matrix[i-1, j], dynamic_matrix[i-1, j-w[i-1]] + v[i-1])
+          dynamic_matrix[i, j] <- max(dynamic_matrix[i-1, j], dynamic_matrix[i-1, j-w[i-1]] + v[i-1])
       }
     }
   }
@@ -111,9 +111,11 @@ knapsack_dynamic <- function(x, W){
 #' 
 #' greedy_knapsack(x = knapsack_objects[1:800,], W = 3500)
 #' greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)
-
+#' @export
+#' 
 greedy_knapsack <- function(x, W){
   stopifnot(is.data.frame(x) && all(x > 0) && W > 0)
+  # ratio <- x$v/x$w
   x <- x[order(x$v/x$w, decreasing = TRUE),]
   i <- 1
   while(sum(x$w[1:i]) <= W) {
