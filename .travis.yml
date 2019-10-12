@@ -4,7 +4,9 @@ language: R
 cache: packages
 
 before_install: 
-  - Rscript -e 'install.packages(c("knitr", "lineprof"))'
+  - Rscript -e 'install.packages(c("knitr"))'
+  
+r_github_packages: hadley/lineprof
 
 env:
   global:
