@@ -10,6 +10,7 @@ vignette: >
 
 ```{r setup}
 library(assignment6Package)
+library(lineprof)
 ```
 
 ```{r}
@@ -56,3 +57,17 @@ Using the a heuristic or approximation for the problem which will not give an ex
 greedy_knapsack(x = knapsack_objects[1:800,], W = 3500)
 greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)
 ```
+
+## Profile your code and optimize your code
+Using package lineprof to observe the time and alloc consumed in the function, identify bottlenecks.
+```{r}
+source("../R/knapsack.R")
+l1<-lineprof(brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500))
+l1
+l2<- lineprof(knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500))
+l2
+l3<-lineprof(greedy_knapsack(x = knapsack_objects[1:800,], W = 3500))
+l3
+```
+
+
