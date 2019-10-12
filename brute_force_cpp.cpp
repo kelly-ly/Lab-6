@@ -4,7 +4,8 @@
 using namespace Rcpp;
 using namespace std;
 
-// [[Rcpp::export]]
+
+//[[Rcpp::export]]
 List brute_force(IntegerVector w, NumericVector v ,int W) {
   int n=sizeof(w);
   NumericVector result(0);
