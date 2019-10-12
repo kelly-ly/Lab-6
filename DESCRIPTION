@@ -12,4 +12,4 @@ Encoding: UTF-8
 Depends: R (>= 3.5.0)
 Suggests: testthat (>= 2.1.0), knitr, rmarkdown
 VignetteBuilder: knitr
-Imports: foreach, doParallel, parallel
+Imports: Rcpp (>= 0.11.0), foreach, doParallel, parallel
