@@ -62,11 +62,11 @@ greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)
 Using package lineprof to observe the time and alloc consumed in the function, identify bottlenecks.
 ```{r}
 source("../R/knapsack.R")
-l1<-lineprof(brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500))
+l1<-lineprof(brute_force_knapsack(x = knapsack_objects[1:10,], W = 3500))
 l1
-l2<- lineprof(knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500))
+l2<- lineprof(knapsack_dynamic(x = knapsack_objects[1:20,], W = 3500))
 l2
-l3<-lineprof(greedy_knapsack(x = knapsack_objects[1:800,], W = 3500))
+l3<-lineprof(greedy_knapsack(x = knapsack_objects[1:3000,], W = 3500))
 l3
 ```
 
