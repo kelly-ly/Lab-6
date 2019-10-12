@@ -4,7 +4,7 @@ language: R
 cache: packages
 
 before_install: 
-  - Rscript -e 'install.packages(c("knitr"))'
+  - Rscript -e 'install.packages(c("knitr", "lineprof"))'
 
 env:
   global:
