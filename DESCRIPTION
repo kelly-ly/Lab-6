@@ -9,8 +9,7 @@ Description: Advanced Programming in R (LAB6), build by group 11.
 License: GPL (>= 2)
 RoxygenNote: 6.1.1
 Encoding: UTF-8
-Depends: R (>= 3.5.0), Rcpp (>= 0.11.0)
+Depends: R (>= 3.5.0)
 Suggests: testthat (>= 2.1.0), knitr, rmarkdown
 VignetteBuilder: knitr
-Imports: Rcpp (>= 0.11.0), foreach, doParallel, parallel
-LinkingTo: Rcpp
+Imports: foreach, doParallel, parallel
